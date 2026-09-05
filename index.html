@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0b1220" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="TradeLog" />
+    <link rel="manifest" href="manifest.json" />
+    <link rel="apple-touch-icon" href="icons/icon-180.svg" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>TradeLog — Nhật ký Forex</title>
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">NHẬT KÝ GIAO DỊCH</p>
+          <h1>TradeLog</h1>
+        </div>
+        <button class="avatar" id="settingsButton" aria-label="Mở cài đặt">⚙</button>
+      </header>
+
+      <section class="balance-card" aria-label="Tổng quan tài khoản">
+        <div class="balance-heading"><span>Số dư hiện tại</span><span class="live-dot">● Live</span></div>
+        <p class="balance" id="currentBalance">$10,000.00</p>
+        <div class="balance-meta">
+          <span>Vốn đầu kỳ <strong id="startingBalance">$10,000</strong></span>
+          <span class="positive" id="totalReturn">+0.00%</span>
+        </div>
+      </section>
+
+      <section class="period-row">
+        <div>
+          <p class="section-label">HIỆU SUẤT</p>
+          <h2>Tháng này</h2>
+        </div>
+        <select id="monthFilter" aria-label="Lọc theo tháng"></select>
+      </section>
+
+      <section class="metrics-grid" aria-label="Các chỉ số giao dịch">
+        <article class="metric"><span>Lợi nhuận ròng</span><strong id="netProfit">$0</strong><small id="profitSubtext">0 lệnh đã đóng</small></article>
+        <article class="metric"><span>Tỷ lệ thắng</span><strong id="winRate">—</strong><small id="winRateSubtext">Chưa có dữ liệu</small></article>
+        <article class="metric"><span>Profit factor</span><strong id="profitFactor">—</strong><small>Tổng lời / tổng lỗ</small></article>
+        <article class="metric"><span>Chuỗi thắng</span><strong id="winStreak">0</strong><small>Lệnh liên tiếp</small></article>
+      </section>
+
+      <section class="chart-section">
+        <div class="section-title"><div><p class="section-label">ĐƯỜNG VỐN</p><h2>Biến động số dư</h2></div><span id="chartCaption">Chưa có dữ liệu</span></div>
+        <div class="chart-wrap"><svg id="equityChart" viewBox="0 0 320 135" preserveAspectRatio="none" role="img" aria-label="Biểu đồ đường vốn"></svg></div>
+      </section>
+
+      <section class="trades-section">
+        <div class="section-title">
+          <div><p class="section-label">LỊCH SỬ</p><h2>Giao dịch gần đây</h2></div>
+          <button class="text-button" id="clearFilter">Tất cả</button>
+        </div>
+        <div class="empty-state" id="emptyState">
+          <div class="empty-icon">↗</div>
+          <h3>Chưa có giao dịch nào</h3>
+          <p>Chạm nút + để ghi lại lệnh đầu tiên của bạn.</p>
+        </div>
+        <div class="trade-list" id="tradeList"></div>
+      </section>
+    </main>
+
+    <button class="fab" id="addTradeButton" aria-label="Thêm giao dịch">+</button>
+
+    <dialog id="tradeDialog" class="sheet">
+      <form id="tradeForm" method="dialog">
+        <div class="sheet-handle"></div>
+        <div class="sheet-header"><div><p class="section-label">GHI NHẬT KÝ</p><h2 id="formTitle">Thêm giao dịch</h2></div><button type="button" class="close" data-close aria-label="Đóng">×</button></div>
+        <input type="hidden" id="tradeId" />
+        <div class="form-grid two-cols">
+          <label>Cặp tiền<input id="pair" maxlength="12" placeholder="EURUSD" required autocapitalize="characters" /></label>
+          <label>Ngày giao dịch<input id="date" type="date" required /></label>
+          <label>Loại lệnh<select id="side"><option value="Buy">Buy</option><option value="Sell">Sell</option></select></label>
+          <label>Khối lượng (lot)<input id="lot" type="number" min="0.01" step="0.01" placeholder="0.10" required /></label>
+          <label>Giá vào<input id="entry" type="number" min="0" step="any" placeholder="1.08500" /></label>
+          <label>Giá ra<input id="exit" type="number" min="0" step="any" placeholder="1.09000" /></label>
+          <label class="full-width">Kết quả (USD)<input id="pnl" type="number" step="0.01" placeholder="Ví dụ: 125.50 hoặc -50" required /></label>
+          <label class="full-width">Ghi chú<textarea id="note" rows="3" placeholder="Thiết lập, cảm xúc, bài học rút ra..."></textarea></label>
+        </div>
+        <button class="primary-button" type="submit">Lưu giao dịch</button>
+      </form>
+    </dialog>
+
+    <dialog id="settingsDialog" class="sheet small-sheet">
+      <form id="settingsForm" method="dialog">
+        <div class="sheet-handle"></div>
+        <div class="sheet-header"><div><p class="section-label">CÀI ĐẶT</p><h2>Tài khoản</h2></div><button type="button" class="close" data-close aria-label="Đóng">×</button></div>
+        <label>Vốn ban đầu (USD)<input id="initialCapital" type="number" min="0" step="0.01" required /></label>
+        <button class="primary-button" type="submit">Lưu cài đặt</button>
+        <button class="danger-button" id="exportButton" type="button">Xuất dữ liệu JSON</button>
+        <button class="danger-button" id="resetButton" type="button">Xóa toàn bộ nhật ký</button>
+      </form>
+    </dialog>
+
+    <div class="toast" id="toast" role="status"></div>
+    <script src="app.js"></script>
+  </body>
+</html>
