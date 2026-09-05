@@ -73,14 +73,14 @@
         <div class="sheet-header"><div><p class="section-label">GHI NHẬT KÝ</p><h2 id="formTitle">Thêm giao dịch</h2></div><button type="button" class="close" data-close aria-label="Đóng">×</button></div>
         <input type="hidden" id="tradeId" />
         <div class="form-grid two-cols">
-          <label>Cặp tiền<input id="pair" maxlength="12" placeholder="EURUSD" required autocapitalize="characters" /></label>
+          <label>Cặp tiền<select id="pair" required><option>EURUSD</option><option>GBPUSD</option><option>USDJPY</option><option>XAUUSD</option><option>XAGUSD</option><option>BTCUSD</option><option>USOIL</option></select></label>
           <label>Ngày giao dịch<input id="date" type="date" required /></label>
           <label>Loại lệnh<select id="side"><option value="Buy">Buy</option><option value="Sell">Sell</option></select></label>
           <label>Khối lượng (lot)<input id="lot" type="number" min="0.01" step="0.01" placeholder="0.10" required /></label>
           <label>Giá vào<input id="entry" type="number" min="0" step="any" placeholder="1.08500" /></label>
           <label>Giá ra<input id="exit" type="number" min="0" step="any" placeholder="1.09000" /></label>
           <label class="full-width">Kết quả (USD)<input id="pnl" type="number" step="0.01" placeholder="Ví dụ: 125.50 hoặc -50" required /></label>
-          <label class="full-width">Ghi chú<textarea id="note" rows="3" placeholder="Thiết lập, cảm xúc, bài học rút ra..."></textarea></label>
+          <label class="full-width">Ghi chú<textarea id="note" rows="3" placeholder="Thiết lập, cảm xúc, bài học rút ra..."></textarea></label><div class="full-width"><label>Ảnh chart<input id="chartImage" type="file" accept="image/*" /></label><img id="previewImage" style="display:none;max-width:100%;max-height:160px;margin-top:8px;border-radius:10px" /></div>
         </div>
         <button class="primary-button" type="submit">Lưu giao dịch</button>
       </form>
