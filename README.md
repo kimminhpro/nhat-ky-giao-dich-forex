@@ -1,6 +1,10 @@
 # TradeLog — Nhật ký giao dịch Forex
 
-Web app tĩnh, dữ liệu được lưu riêng trong trình duyệt (`localStorage`). Không cần máy chủ hay cơ sở dữ liệu.`r`n`r`n## Truy cập dự án`r`n`r`n[**Mở TradeLog**](https://kimminhpro.github.io/nhat-ky-giao-dich-forex/)
+Web app tĩnh, dữ liệu được lưu riêng trong trình duyệt (`localStorage`). Không cần máy chủ hay cơ sở dữ liệu.
+
+## Truy cập dự án
+
+[**Mở TradeLog**](https://kimminhpro.github.io/nhat-ky-giao-dich-forex/)
 
 ## Đưa lên GitHub Pages
 
